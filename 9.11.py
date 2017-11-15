@@ -7,7 +7,6 @@ class ItemToPurchase:
         self.item_quantity = item_quantity
         self.item_description = item_description
 
-        #adding print_item_description method
 
     def print_item_description(self):
         print('%s: %s' % (self.item_name, self.item_description))
@@ -23,8 +22,9 @@ class ShoppingCart:
         self.current_date = current_date
         self.cart_items = []
 
-    def add_item(self, items):
-        self.cart_items.append(items)
+    #def add_item(self, items, quantity):
+    def add_item(self, name, price, quantity):
+        self.cart_items.append(name, price, quantity)
         #self.cart_items += ItemToPurchase
 
     def remove_item(self, ItemToRemove):
@@ -75,32 +75,41 @@ class ShoppingCart:
 def main():
     cust_name = ShoppingCart()
     curr_date = ShoppingCart()
-    cust_name.customer_name = input('Enter customer\'s name:\n')
-    curr_date.current_date = input('Enter today\'s date:')
+    cust_name.customer_name = input('Enter customer\'s name: ')
+    curr_date.current_date = input('Enter today\'s date: ')
 
 
     print('Item 1')
-    name = input('Enter the item name:\n')
-    desc = input('Enter a description of the item:\n')
-    price = int(input('Enter the item price:\n'))
-    quantity = int(input('Enter the item quantity:\n\n'))
+    name = input('Enter the item name: ')
+    desc = input('Enter a description of the item: ')
+    price = int(input('Enter the item price: '))
+    quantity = int(input('Enter the item quantity: '))
     item1 = ItemToPurchase(name, price, quantity, desc)
 
     print('Item 2')
-    name = input('Enter the item name:\n')
-    desc = input('Enter a description of the item:\n')
-    price = int(input('Enter the item price:\n'))
-    quantity = int(input('Enter the item quantity:\n\n'))
+    name = input('Enter the item name: ')
+    desc = input('Enter a description of the item: ')
+    price = int(input('Enter the item price: '))
+    quantity = int(input('Enter the item quantity: '))
     item2 = ItemToPurchase(name, price, quantity, desc)
 
     print('TOTAL COST')
     item1.print_item_cost()
     item2.print_item_cost()
     print('\nTotal: $%s' % (item1.print_cost + item2.print_cost))
-        
+
+    print('Shopping Cart')
     cart = ShoppingCart()
-    print('Cart Items:')
-    cart.add_item(item1)
+    name = input('Enter the item name: ')
+    price = int(input('Enter the item price: '))
+    quantity = int(input('Enter the item quantity: '))
+    ShoppingCart.add_item(name, price, quantity)
+
+
+    #cart = ShoppingCart()
+    #print('Cart Items:')
+    #cart.add_item(item1)
+
 
 if __name__ == "__main__":
 
