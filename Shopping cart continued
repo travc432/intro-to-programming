@@ -1,0 +1,82 @@
+class ItemToPurchase:
+    def __init__(self):
+        self.item_name = 'none';
+        self.item_price = 0;
+        self.item_quantity = 0;
+
+    def print_item_cost(self):
+        print(self.item_name + ' ' + str(self.item_quantity) +
+              ' @ $' + str(self.item_price) + ' = $' +
+              str( self.item_price * self.item_quantity ));
+
+class ShoppingCart:
+    def __init__(self, customer_name = 'none', current_date = 'November', cart_items = []):
+        self.customer_name = customer_name
+        self.current_date = current_date
+        self.cart_items = cart_items
+        
+    def add_item(self, string):
+        print('\nADD ITEM TO CART', end='\n')
+        item_name = str(input('Enter the item name: '))
+        item_description = str(input('\nEnter the item description: '))
+        item_price = int(input('\nEnter the item price: '))
+        item_quantity = int(input('\nEnter the item quantity: '))
+        self.cart_items.append(ItemToPurchase(item_name, item_price, item_quantity, item_description))
+
+    def remove_item(self):
+        print('\nREMOVE ITEM FROM CART', end='\n')
+        string = str(input('Enter name of item to remove: '))
+        i = 0
+        for item in self.cart_items:
+            if(item.item_name == string):
+                del self.cart_items[i]
+            i += 1
+    def modify_item(self):
+        print('\nCHANGE ITEM QUANTITY', end='\n')
+        name = str(input('Enter the item name: '))
+        quantity = int(input('Enter the new quantity: '))
+        for item in self.cart_items:
+            if(item.item_name == name):
+                item.item_quantity = quantity
+                
+    def get_num_items_in_cart(self):
+        num_items = len(self.cart_items)
+        return num_items
+    
+    def get_cost_of_cart(self):
+        total_cost = 0
+        cost = 0
+        for item in self.cart_items:
+            cost = (item.item_quantity * item.item_price)
+            total_cost += cost
+        return total_cost
+    
+    def print_total():
+        total_cost = get_cost_of_cart()
+        if (total_cost == 0):
+            print('SHOPPING CART IS EMPTY')
+        else:
+            output_cart()
+            
+    def print_descriptions(self):
+        print('{}\'s Shopping Cart - {}'.format(self.customer_name, self.current_date),end='\n')
+        print('\nItem Descriptions', end='\n')
+        for item in self.cart_items:
+            print('{}: {}'.format(item.item_name, item.item_description), end='\n')
+            
+    def output_cart(self):
+        print('\nOUTPUT SHOPPING CART', end='\n')
+        print('{}\'s Shopping Cart - {}'.format(self.customer_name, self.current_date),end='\n')
+        print('Number of Items:', len(self.cart_items), end='\n\n')
+        tc = 0
+        for item in self.cart_items:
+            print('{} {} @ ${} = ${}'.format(item.item_name, item.item_quantity, item.item_price, (item.item_quantity * item.item_price)), end='\n')
+            tc += (item.item_quantity * item.item_price)
+        print('\nTotal: ${}'.format(tc), end='\n')
+    
+if __name__ == "__main__":
+#define class objects here
+    customer_name = str(input('Enter customer\'s name: '))
+    current_date = str(input('\nEnter today\'s date: '))
+    print('%s' % customer_name+"'s Shopping cart - ", current_date, end='\n')
+    print('Number of Items:', num_items, end='\n')
