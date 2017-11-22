@@ -7,23 +7,15 @@ result = open('golf.txt', 'w')
 while True:
 
     name = input('Player Name(or q to quit):')
-
     if name == 'q':
-
         break
 
     score = input('Player Score:')
-
-
 
 #write to file golf.txt
 
     result.write(name + '\n')
 
-
-
     result.write(str(score) + '\n')
-
-
 
 result.close() 
