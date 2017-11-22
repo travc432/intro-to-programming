@@ -1,0 +1,33 @@
+
+
+def main():
+
+
+
+    data = open('golf.txt', 'r')
+
+    name = data.readline()
+
+
+
+    while name != '':
+
+
+
+        score = data.readline()
+
+        name = name.rstrip('\n')
+
+        score = score.rstrip('\n')
+
+        print(name + ' score is ' + score)
+
+        name = data.readline()
+
+  
+
+    data.close()
+
+
+
+main()
