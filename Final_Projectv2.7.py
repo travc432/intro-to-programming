@@ -84,7 +84,7 @@ class TicketTracking:
     # our third function gives information about resolved tickets
     def resolved(self):
         try:
-            filename = 'resolvedDay.csv'
+            filename = 'resolvedDay1.csv'
             with open('resolvedDay1.csv', 'r') as f:
                 global resolved_tickets
                 # a list!
@@ -166,19 +166,31 @@ class TicketTracking:
 
     # our sixth and final function gives an overview of the day's workload
     def daily_summary(self):
-        num_opened = len(open_tickets)
-        num_resolved = len(resolved_tickets)
-        print('%d tickets were opened.' % num_opened)
-        print('%d tickets were closed.' % num_resolved)
+        # Initially this function didn't work if previous function were run.  We found that it
+        # was because num_resolved and num_opened were only defined in those functions and
+        # not this one, so we made sure it include the code to define them here.  No matter
+        # which function will run first, the variable will be defined.
+        with open('resolvedDay1.csv', 'r') as f:
+            global resolved_tickets
+            # a list!
+            resolved_tickets = [row['Reference Number'] for row in DictReader(f)]
+            num_resolved = len(resolved_tickets)
+        with open('opened.csv', 'r') as f:
+            global open_tickets
+            # a list!
+            open_tickets = [row['Reference Number'] for row in DictReader(f)]
+            num_opened = len(open_tickets)
+            print('%d tickets were opened.' % num_opened)
+            print('%d tickets were closed.' % num_resolved)
 
-        if num_opened > num_resolved:
-            print('We fell behind by %d tickets.' % (num_opened - num_resolved))
+            if num_opened > num_resolved:
+                print('We fell behind by %d tickets.' % (num_opened - num_resolved))
 
-        if num_opened < num_resolved:
-            print('We caught up by %d tickets.' % (num_resolved - num_opened))
+            if num_opened < num_resolved:
+                print('We caught up by %d tickets.' % (num_resolved - num_opened))
 
-        if num_opened == num_resolved:
-            print('We broke even today.')
+            if num_opened == num_resolved:
+                print('We broke even today.')
 
 
 def main():
